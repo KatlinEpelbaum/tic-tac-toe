@@ -1,0 +1,59 @@
+body {
+    margin: 0;
+    font-family: 'Poppins', sans-serif;  /* Cute font */
+    background: linear-gradient(135deg, rgba(255, 182, 194, 0.8), rgba(255, 205, 240, 0.8)); /* Soft pastel gradient */
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.game {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 50px;
+    background-color: rgba(255, 255, 255, 0.8); /* Slight white background behind the board */
+    border-radius: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+#board {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 1fr 1fr;
+    gap: 10px;
+}
+
+.cell {
+    border: 4px solid rgb(221, 153, 176);
+    height: 128px;
+    width: 128px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 72px;
+    color: rgb(218, 144, 215);
+    font-weight: bold;  /* Bold letters for X and O */
+    border-radius: 15px; /* Rounder corners */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+    transition: all 0.3s ease;
+    cursor: pointer;
+    background-color: #fff;  /* White background for cells */
+}
+
+.cell:hover {
+    box-shadow: 0 8px 18px rgba(0, 0, 0, 0.2); /* Larger shadow on hover */
+    transform: scale(1.1); /* Slightly enlarge the cell */
+}
+
+.cell:active {
+    border-color: rgb(187, 121, 146);
+    transform: scale(0.95); /* Slight shrink effect when clicked */
+}
+
+h1 {
+    font-size: 36px;
+    color: #333;
+    text-align: center;
+}
