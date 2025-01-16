@@ -1,10 +1,11 @@
 const cellDivs = Array.from(document.getElementsByClassName('cell'));
 const messageDiv = document.getElementById('message');
+const resetBtn = document.getElementById('reset-game')
 
-let nextPlayer = 0;
+let nextPlayer, playerWon, moveCount;
 let symbols = ['X', 'O'];
-let playerWon = false;
-let moveCount = 0;  
+
+initGame();
 
 const winningCombinations = [
     ['00', '01', '02'], // top row
@@ -42,17 +43,41 @@ cellDivs.forEach(cellDiv => {
             nextPlayer = Number(!nextPlayer);
 
         }
-
     });
 
 });
+resetBtn.addEventListener('click', e =>{
+    initGame();
+});
 
-function hasPlayerWon(moves) {
+function initGame() {
+
+    nextPlayer = 0;
+    playerWon = false;
+    moveCount = 0;
+    for ( let i = 0; i < sizes; y++) {
+
+        const tr = document.createElement('tr')
+
+        for( let x = 0; x < sizes; x++) {
+
+            const td = document.createElement('td')
+            td.classList.add('cell');
+            td.dataset.y = y;
+            td.dataset.x = x;
+            
+            tr.appendChild(td)
+        }
+    gameBoardTable
+    }
+}
+
+function hasPlayerWon( moves ) {
 
     let hasPlayerWon = false;
 
-    winningCombinations.forEach(c => {
-        if (c.every(m => moves.includes(m))) {
+    winningCombinations.forEach( c => {
+        if ( c.every(m => moves.includes(m)) ) {
             hasPlayerWon = true;
 
             c.forEach( ([y, x]) => {

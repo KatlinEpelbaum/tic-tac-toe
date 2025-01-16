@@ -24,6 +24,7 @@ body {
     grid-template-columns: 1fr 1fr 1fr;
     grid-template-rows: 1fr 1fr 1fr;
     gap: 10px;
+    padding-bottom: 2rem;
 }
 
 .cell {
@@ -66,4 +67,24 @@ h1 {
 }
 .cell.winning {
     color: deeppink;
+}
+
+#reset-game {
+    font-size: 1rem;
+    background-color: #ff66b2; /* Soft pink background */
+    color: white; /* White text */
+    border: none; /* No border */
+    border-radius: 25px; /* Rounded corners */
+    padding: 10px 20px; /* Add some space around the text */
+    font-family: 'Poppins', sans-serif; /* Playful font */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transition */
+}
+
+#reset-game:hover {
+    background-color: #ff3385; /* Slightly darker pink on hover */
+    transform: scale(1.1); /* Slightly enlarge button on hover */
+}
+
+#reset-game:active {
+    transform: scale(1); /* Button returns to normal size when clicked */
 }
