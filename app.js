@@ -57,6 +57,7 @@ function hasPlayerWon(moves) {
 
             c.forEach( ([y, x]) => {
                 console.log(y, x);
+                document.querySelector(`.cell[data-y="${y}"].cell[data-x="${x}"]`).classList.add('winning');
             });
         }
     });
