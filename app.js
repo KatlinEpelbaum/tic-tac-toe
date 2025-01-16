@@ -2,7 +2,7 @@ const cellDivs = Array.from(document.getElementsByClassName('cell'));
 
 let nextPlayer = 0;
 let symbols = ['X', 'O'];
-
+let gameOver = false
 const winningCombinations = [
     ['00', '01', '02'], // top row
     ['10', '11', '12'], // middle row
@@ -20,14 +20,16 @@ cellDivs.forEach( cellDiv => {
     
     cellDiv.addEventListener('click', e => {
 
-        if ( !e.target.innerText ) {
+        if ( !e.target.innerText && !gameOver) {
 
             const move = e.target.dataset.y + e.target.dataset.x;
             gameState[nextPlayer].push(move);
 
             e.target.innerText = symbols[nextPlayer];
 
-            console.log(isGameOver(gameState[nextPlayer]));
+            if (isGameOver(gameState[nextPlayer])){
+                gameOver = true;
+            };
 
             nextPlayer = Number(!nextPlayer);
 
