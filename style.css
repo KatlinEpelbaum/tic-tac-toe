@@ -1,6 +1,6 @@
 body {
     margin: 0;
-    font-family: 'Poppins', sans-serif;  /* Cute font */
+    font-family: 'Poppins', sans-serif;
     background: linear-gradient(135deg, rgba(255, 182, 194, 0.8), rgba(255, 205, 240, 0.8)); /* Soft pastel gradient */
     height: 100vh;
     display: flex;
@@ -16,6 +16,7 @@ body {
     background-color: rgba(255, 255, 255, 0.8); /* Slight white background behind the board */
     border-radius: 20px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    flex-direction: column;
 }
 
 #board {
@@ -56,4 +57,13 @@ h1 {
     font-size: 36px;
     color: #333;
     text-align: center;
+}
+.message {
+    font-family: 'Poppins', sans-serif;
+    padding-bottom: 20px;
+    font-size: 2rem;
+    font-weight: bolder;
+}
+.cell.winning {
+    color: deeppink;
 }
