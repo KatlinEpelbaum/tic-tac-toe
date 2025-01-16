@@ -4,7 +4,7 @@ const messageDiv = document.getElementById('message');
 let nextPlayer = 0;
 let symbols = ['X', 'O'];
 let playerWon = false;
-let moveCount = 0;  // Initialize move count
+let moveCount = 0;  
 
 const winningCombinations = [
     ['00', '01', '02'], // top row
@@ -30,7 +30,7 @@ cellDivs.forEach(cellDiv => {
 
             e.target.innerText = symbols[nextPlayer];
 
-            moveCount++;  // Increment the move count
+            moveCount++;
 
             if (hasPlayerWon(gameState[nextPlayer])) {
                 playerWon = true;
@@ -54,6 +54,10 @@ function hasPlayerWon(moves) {
     winningCombinations.forEach(c => {
         if (c.every(m => moves.includes(m))) {
             hasPlayerWon = true;
+
+            c.forEach( ([y, x]) => {
+                console.log(y, x);
+            });
         }
     });
 
