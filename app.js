@@ -16,39 +16,10 @@ const winningCombinations = [
     ['02', '11', '20']  // top-right to bottom-left diagonal
 ];
 
-let nextPlayer, playerWon, moveCount;
-let gameState = [[], []];
+let nextPlayer, playerWon, moveCount, gameState;
+
 
 initGame();
-/*
-cellDivs.forEach( cellDiv => {
-    
-    cellDiv.addEventListener('click', e => {
-
-        if ( !e.target.innerText && !playerWon ) {
-
-            moveCount++;
-
-            const move = e.target.dataset.y + e.target.dataset.x;
-            gameState[nextPlayer].push(move);
-
-            e.target.innerText = symbols[nextPlayer];
-
-            if ( hasPlayerWon(gameState[nextPlayer]) ) {
-                playerWon = true;
-                messageDiv.innerText = `${symbols[nextPlayer]} won the game!`;
-            } else if ( moveCount == 9 ) {
-                messageDiv.innerText = `The game ended in a draw!`;
-            }
-
-            nextPlayer = Number(!nextPlayer);
-
-        }
-
-    });
-
-});
-*/
 
 resetBtn.addEventListener('click', e => {
     initGame();
@@ -59,6 +30,7 @@ function initGame () {
     nextPlayer = 0;
     playerWon = false;
     moveCount = 0;
+    gameState = [[], []];
 
     initGameBoard();
     
@@ -66,13 +38,42 @@ function initGame () {
 
 function initGameBoard(){
 
+    gameBoardDiv.innerHTML = '';
+    messageDiv.innerText = '';
+
     for ( let y = 0; y < gameBoardSize; y++) {
 
         for( let x = 0; x < gameBoardSize; x++) {
 
-            const cellDiv = document.createElement('div')
+            const cellDiv = document.createElement('div');
+            cellDiv.classList.add('cell')
+            cellDiv.dataset.y = y;
+            cellDiv.dataset.x = x;
+
+            cellDiv.addEventListener('click', e => {
+
+                if ( !e.target.innerText && !playerWon ) {
+
+                    moveCount++;
+
+                    const move = e.target.dataset.y + e.target.dataset.x;
+                    gameState[nextPlayer].push(move);
+
+                    e.target.innerText = symbols[nextPlayer];
+
+                    if ( hasPlayerWon(gameState[nextPlayer]) ) {
+                        playerWon = true;
+                        messageDiv.innerText = `${symbols[nextPlayer]} won the game!`;
+                    } else if ( moveCount == 9 ) {
+                        messageDiv.innerText = `The game ended in a draw!`;
+                    }
+
+                    nextPlayer = Number(!nextPlayer);
+                }
+            });
+
+            gameBoardDiv.appendChild(cellDiv);
         }
-        
     }
 
 }
