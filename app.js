@@ -1,9 +1,8 @@
 const cellDivs = Array.from(document.getElementsByClassName('cell'));
 const messageDiv = document.getElementById('message');
-const resetBtn = document.getElementById('reset-game')
+const resetBtn = document.getElementById('reset-game');
 
-let nextPlayer, playerWon, moveCount;
-let symbols = ['X', 'O'];
+let nextPlayer, symbols, playerWon, moveCount;
 
 initGame();
 
@@ -20,72 +19,62 @@ const winningCombinations = [
 
 let gameState = [[], []];
 
-cellDivs.forEach(cellDiv => {
+cellDivs.forEach( cellDiv => {
     
     cellDiv.addEventListener('click', e => {
 
-        if (!e.target.innerText && !playerWon) {
+        if ( !e.target.innerText && !playerWon ) {
+
+            moveCount++;
 
             const move = e.target.dataset.y + e.target.dataset.x;
             gameState[nextPlayer].push(move);
 
             e.target.innerText = symbols[nextPlayer];
 
-            moveCount++;
-
-            if (hasPlayerWon(gameState[nextPlayer])) {
+            if ( hasPlayerWon(gameState[nextPlayer]) ) {
                 playerWon = true;
-                messageDiv.innerText = `${symbols[nextPlayer]} won the game`;
-            } else if (moveCount == 9) {
-                messageDiv.innerText = `The game was a draw`;
+                messageDiv.innerText = `${symbols[nextPlayer]} VÕITIS MÄNGU!`;
+            } else if ( moveCount == 9 ) {
+                messageDiv.innerText = `MÄNG JÄI VIIKI!`;
             }
 
             nextPlayer = Number(!nextPlayer);
 
         }
+
     });
 
 });
-resetBtn.addEventListener('click', e =>{
+
+resetBtn.addEventListener('click', e => {
     initGame();
 });
 
-function initGame() {
+function initGame () {
 
     nextPlayer = 0;
+    symbols = ['X', 'O'];
     playerWon = false;
     moveCount = 0;
-    for ( let i = 0; i < sizes; y++) {
-
-        const tr = document.createElement('tr')
-
-        for( let x = 0; x < sizes; x++) {
-
-            const td = document.createElement('td')
-            td.classList.add('cell');
-            td.dataset.y = y;
-            td.dataset.x = x;
-            
-            tr.appendChild(td)
-        }
-    gameBoardTable
-    }
+    
 }
 
-function hasPlayerWon( moves ) {
+function hasPlayerWon ( moves ) {
 
     let hasPlayerWon = false;
 
     winningCombinations.forEach( c => {
         if ( c.every(m => moves.includes(m)) ) {
             hasPlayerWon = true;
-
+            
             c.forEach( ([y, x]) => {
-                console.log(y, x);
-                document.querySelector(`.cell[data-y="${y}"].cell[data-x="${x}"]`).classList.add('winning');
+                document.querySelector(`.cell[data-y="${y}"][data-x="${x}"]`).classList.add('winning');
             });
+
         }
     });
-
+    
     return hasPlayerWon;
+
 }
