@@ -1,11 +1,10 @@
 const cellDivs = Array.from(document.getElementsByClassName('cell'));
+const gameBoardDiv = document.getElementById('board')
 const messageDiv = document.getElementById('message');
 const resetBtn = document.getElementById('reset-game');
 
-let nextPlayer, symbols, playerWon, moveCount;
-
-initGame();
-
+const gameBoardSize = 3;
+const symbols = ['X', 'O'];
 const winningCombinations = [
     ['00', '01', '02'], // top row
     ['10', '11', '12'], // middle row
@@ -17,8 +16,11 @@ const winningCombinations = [
     ['02', '11', '20']  // top-right to bottom-left diagonal
 ];
 
+let nextPlayer, playerWon, moveCount;
 let gameState = [[], []];
 
+initGame();
+/*
 cellDivs.forEach( cellDiv => {
     
     cellDiv.addEventListener('click', e => {
@@ -34,9 +36,9 @@ cellDivs.forEach( cellDiv => {
 
             if ( hasPlayerWon(gameState[nextPlayer]) ) {
                 playerWon = true;
-                messageDiv.innerText = `${symbols[nextPlayer]} VÕITIS MÄNGU!`;
+                messageDiv.innerText = `${symbols[nextPlayer]} won the game!`;
             } else if ( moveCount == 9 ) {
-                messageDiv.innerText = `MÄNG JÄI VIIKI!`;
+                messageDiv.innerText = `The game ended in a draw!`;
             }
 
             nextPlayer = Number(!nextPlayer);
@@ -46,6 +48,7 @@ cellDivs.forEach( cellDiv => {
     });
 
 });
+*/
 
 resetBtn.addEventListener('click', e => {
     initGame();
@@ -54,10 +57,24 @@ resetBtn.addEventListener('click', e => {
 function initGame () {
 
     nextPlayer = 0;
-    symbols = ['X', 'O'];
     playerWon = false;
     moveCount = 0;
+
+    initGameBoard();
     
+}
+
+function initGameBoard(){
+
+    for ( let y = 0; y < gameBoardSize; y++) {
+
+        for( let x = 0; x < gameBoardSize; x++) {
+
+            const cellDiv = document.createElement('div')
+        }
+        
+    }
+
 }
 
 function hasPlayerWon ( moves ) {
