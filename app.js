@@ -3,27 +3,45 @@ const gameBoardDiv = document.getElementById('board')
 const messageDiv = document.getElementById('message');
 const resetBtn = document.getElementById('reset-game');
 
-const gameBoardSize = 3;
+const gameBoardSize = 4;
 const symbols = ['X', 'O'];
-const winningCombinations = [
-    ['00', '01', '02'], // top row
-    ['10', '11', '12'], // middle row
-    ['20', '21', '22'], // bottom row
-    ['00', '10', '20'], // left column
-    ['01', '11', '21'], // middle column
-    ['02', '12', '22'], // right column
-    ['00', '11', '22'], // top-left to bottom-right diagonal
-    ['02', '11', '20']  // top-right to bottom-left diagonal
-];
-
+let winningCombinations = [];
 let nextPlayer, playerWon, moveCount, gameState;
 
 
 initGame();
+initWinningCombinations()
 
 resetBtn.addEventListener('click', e => {
     initGame();
+    initWinningCombinations()
 });
+
+function initWinningCombinations() {
+    for(let i = 0; i < gameBoardSize; i++) {
+        let row = [];
+        let col = [];
+        
+        for (let j = 0; j < gameBoardSize; j++){
+            row.push(`${i}${j}`);
+            col.push(`${j}${i}`);
+        }
+        winningCombinations.push(row)
+        winningCombinations.push(col)
+    }
+
+    let d1= [];
+    let d2= [];
+
+    for (let k = 0; k < gameBoardSize; k++){
+        d1.push(`${k}${k}`);
+        d2.push(`${k}${gameBoardSize - 1 - k}`);
+    }
+    winningCombinations.push(d1);
+    winningCombinations.push(d2);
+    
+    console.log(winningCombinations)
+}
 
 function initGame () {
 
@@ -40,6 +58,9 @@ function initGameBoard(){
 
     gameBoardDiv.innerHTML = '';
     messageDiv.innerText = '';
+
+    gameBoardDiv.style.gridTemplateColumns = `repeat(${gameBoardSize},128px)`;
+    gameBoardDiv.style.gridTemplateRows = `repeat(${gameBoardSize},128px)`;
 
     for ( let y = 0; y < gameBoardSize; y++) {
 
